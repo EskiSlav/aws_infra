@@ -3,9 +3,9 @@ module "lambda_function" {
 
   function_name = var.function_name
   description   = "Telegram Compliment Bot default handler of messages"
-  handler       = "bot.lambda_handler"
+  handler       = "lambda_handler.lambda_handler"
   runtime       = "python3.9"
-  publish       = true
+  # publish       = true
 
   attach_cloudwatch_logs_policy = true
 
@@ -14,7 +14,8 @@ module "lambda_function" {
 
   source_path = [
     {
-      path = "../../../compliment_bot",
+      path             = "../../../compliment_bot",
+      pip_requirements = true,
       patterns = [
         "!.mypy_cache/.*", # Skip all txt files recursively
         "!__pycache__",
