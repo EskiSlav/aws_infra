@@ -1,4 +1,4 @@
-# init
+# ssm
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -16,16 +16,13 @@
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_dynamodb_table"></a> [dynamodb\_table](#module\_dynamodb\_table) | terraform-aws-modules/dynamodb-table/aws | n/a |
+No modules.
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_s3_bucket.terraform_state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_acl.terraform_state_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_ssm_parameter.bot_api_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 
 ## Inputs
 
@@ -33,5 +30,7 @@ No inputs.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_bot_api_token_arn"></a> [bot\_api\_token\_arn](#output\_bot\_api\_token\_arn) | ARN of bot token |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

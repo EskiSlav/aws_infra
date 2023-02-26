@@ -1,0 +1,29 @@
+data "aws_caller_identity" "current" {}
+
+data "terraform_remote_state" "ssm" {
+  backend = "s3"
+
+  config = {
+    bucket = "compliment-bot-terraform-state"
+    key    = "ssm/terraform.tfstate"
+    region = "eu-west-2"
+  }
+}
+
+data "aws_iam_policy" "push_to_cloudwatch" {
+  arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+}
+
+data "template_file" "lambda_bot_policy" {
+  template = file("${path.module}/templates/lambda_bot_policy.tpl")
+  vars = {
+    ssm_parameter_arn = data.terraform_remote_state.ssm.outputs.bot_api_token_arn
+    account_id        = data.aws_caller_identity.current.account_id
+    region            = var.region
+    functionname      = var.function_name
+  }
+}
+
+data "template_file" "lambda_bot_assume_role" {
+  template = file("${path.module}/templates/lambda_bot_assume_role.tpl")
+}
