@@ -22,6 +22,16 @@
         "Resource": [
             "arn:aws:logs:${region}:${account_id}:log-group:/aws/lambda/${functionname}:*"
         ]
+    },
+    {
+        "Effect": "Allow",
+        "Action": [
+            "dynamodb:*"
+        ],
+        "Resource": [
+            "${compliments_dynamodb_table}",
+            "${users_dynamodb_table}"
+        ]
     }
   ]
 }

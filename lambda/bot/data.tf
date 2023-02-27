@@ -10,6 +10,26 @@ data "terraform_remote_state" "ssm" {
   }
 }
 
+data "terraform_remote_state" "compliments_dynamodb" {
+  backend = "s3"
+
+  config = {
+    bucket = "compliment-bot-terraform-state"
+    key    = "dynamodb/compliments/terraform.tfstate"
+    region = "eu-west-2"
+  }
+}
+
+data "terraform_remote_state" "users_dynamodb" {
+  backend = "s3"
+
+  config = {
+    bucket = "compliment-bot-terraform-state"
+    key    = "dynamodb/users/terraform.tfstate"
+    region = "eu-west-2"
+  }
+}
+
 data "aws_iam_policy" "push_to_cloudwatch" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
 }
@@ -17,10 +37,12 @@ data "aws_iam_policy" "push_to_cloudwatch" {
 data "template_file" "lambda_bot_policy" {
   template = file("${path.module}/templates/lambda_bot_policy.tpl")
   vars = {
-    ssm_parameter_arn = data.terraform_remote_state.ssm.outputs.bot_api_token_arn
-    account_id        = data.aws_caller_identity.current.account_id
-    region            = var.region
-    functionname      = var.function_name
+    ssm_parameter_arn          = data.terraform_remote_state.ssm.outputs.bot_api_token_arn
+    account_id                 = data.aws_caller_identity.current.account_id
+    region                     = var.region
+    functionname               = var.function_name
+    compliments_dynamodb_table = data.terraform_remote_state.compliments_dynamodb.outputs.dynamodb_table_arn
+    users_dynamodb_table       = data.terraform_remote_state.users_dynamodb.outputs.dynamodb_table_arn
   }
 }
 
