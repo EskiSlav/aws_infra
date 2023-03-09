@@ -11,7 +11,7 @@ resource "aws_api_gateway_rest_api" "lambda_bot" {
 resource "aws_api_gateway_resource" "lambda_bot" {
   rest_api_id = aws_api_gateway_rest_api.lambda_bot.id
   parent_id   = aws_api_gateway_rest_api.lambda_bot.root_resource_id
-  path_part   = "bot"
+  path_part   = var.function_name
 }
 
 resource "aws_api_gateway_integration" "lambda_bot_post" {

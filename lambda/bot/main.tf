@@ -14,7 +14,7 @@ module "lambda_function" {
 
   source_path = [
     {
-      path             = "../../../compliment_bot",
+      path             = "../../../compliment_bot/bot",
       pip_requirements = true,
       patterns = [
         "!.mypy_cache/.*", # Skip all txt files recursively
@@ -46,7 +46,7 @@ resource "aws_lambda_permission" "apigw" {
 }
 
 resource "aws_iam_policy" "lambda_bot_policy" {
-  name        = "botPolicy"
+  name        = "${var.function_name}Policy"
   path        = "/"
   description = "Allow access to SSM"
 
@@ -56,7 +56,7 @@ resource "aws_iam_policy" "lambda_bot_policy" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "bot"
+  name               = var.function_name
   assume_role_policy = data.template_file.lambda_bot_assume_role.rendered
 }
 
