@@ -5,14 +5,11 @@ terraform {
     aws = {
       version = "~> 4.56.0"
     }
-    template = {
-      version = "~> 2.2.0"
-    }
   }
 
   backend "s3" {
     bucket         = "compliment-bot-terraform-state"
-    key            = "lambda/bot_alert/terraform.tfstate"
+    key            = "lambda_layers/bot/terraform.tfstate"
     region         = "eu-west-2"
     dynamodb_table = "terraform-lock"
   }

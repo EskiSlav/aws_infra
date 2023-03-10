@@ -1,4 +1,4 @@
-# ssm
+# lambda_layers
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -22,8 +22,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_ssm_parameter.bot_api_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
-| [aws_ssm_parameter.openai_api_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
+| [aws_lambda_layer_version.openai](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_layer_version) | resource |
 
 ## Inputs
 
@@ -33,6 +32,5 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_bot_api_token_arn"></a> [bot\_api\_token\_arn](#output\_bot\_api\_token\_arn) | ARN of bot token |
-| <a name="output_openai_api_token_arn"></a> [openai\_api\_token\_arn](#output\_openai\_api\_token\_arn) | ARN of openai token |
+| <a name="output_openai_layer_arn"></a> [openai\_layer\_arn](#output\_openai\_layer\_arn) | ARN of the layer for OpenAI SDK |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -12,7 +12,7 @@ terraform {
 
   backend "s3" {
     bucket         = "compliment-bot-terraform-state"
-    key            = "lambda_layers/bot/terraform.tfstate"
+    key            = "lambda/bot/terraform.tfstate"
     region         = "eu-west-2"
     dynamodb_table = "terraform-lock"
   }
