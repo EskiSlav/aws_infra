@@ -26,9 +26,11 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_attributes"></a> [attributes](#input\_attributes) | Attributes DynamoDB is going to have | `list(map(string))` | <pre>[<br>  {<br>    "name": "id",<br>    "type": "N"<br>  }<br>]</pre> | no |
+| <a name="input_attributes"></a> [attributes](#input\_attributes) | Attributes DynamoDB is going to have | `list(map(string))` | <pre>[<br>  {<br>    "name": "id",<br>    "type": "S"<br>  }<br>]</pre> | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_dynamodb_table_arn"></a> [dynamodb\_table\_arn](#output\_dynamodb\_table\_arn) | ARN of DynamoDB table |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

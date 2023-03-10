@@ -10,7 +10,7 @@ terraform {
   backend "s3" {
     bucket         = "compliment-bot-terraform-state"
     key            = "security_groups/terraform.tfstate"
-    region         = "us-east-1"
+    region         = "eu-west-2"
     dynamodb_table = "terraform-lock"
   }
 }

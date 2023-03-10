@@ -9,7 +9,7 @@ terraform {
 
   backend "s3" {
     bucket         = "compliment-bot-terraform-state"
-    key            = "dynamodb/users/terraform.tfstate"
+    key            = "ssm/terraform.tfstate"
     region         = "eu-west-2"
     dynamodb_table = "terraform-lock"
   }

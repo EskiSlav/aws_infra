@@ -5,7 +5,7 @@ variable "attributes" {
   default = [
     {
       name = "id"
-      type = "N"
+      type = "S"
     }
   ]
 }
