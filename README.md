@@ -25,4 +25,8 @@ To apply all of the resources you need to apply them in particular order:
 
 ## Lambda
 To deploy lambda functions it is needed to have them locally near the "aws_infra" repository.
-In the future, it will be changed to something more convenient.
+
+## Technical Debt
+1. In the future, lambda should be fetched from repositories and its repository should contain the terraform module to deploy it.
+2. Draw a diagram of the infrastructure.
+3. Separate API Gateway from Lambda folder.
