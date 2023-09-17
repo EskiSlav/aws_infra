@@ -5,7 +5,7 @@ module "lambda_function" {
   description   = "Telegram Compliment Bot default handler of messages"
   handler       = "lambda_handler.lambda_handler"
   runtime       = "python3.9"
-  timeout       = 15
+  timeout       = 60
   # publish       = true
 
   attach_cloudwatch_logs_policy = true
@@ -50,4 +50,29 @@ resource "aws_iam_policy_attachment" "labmda_policy_attach" {
   name       = "labmda_policy_attach"
   roles      = [aws_iam_role.lambda_role.name]
   policy_arn = aws_iam_policy.lambda_bot_policy.arn
+}
+
+# ----------------------------------
+# CREATE TRIGGER
+# ----------------------------------
+
+resource "aws_cloudwatch_event_rule" "every_day" {
+  name                = "every-day-at-nine"
+  description         = "Fires every day at nine oclock"
+  schedule_expression = "cron(0 9 * * ? *)"
+  # schedule_expression = "rate(10 minutes)"
+}
+
+resource "aws_cloudwatch_event_target" "check_lambda_every_five_minutes" {
+  rule      = aws_cloudwatch_event_rule.every_day.name
+  target_id = "check_lambda"
+  arn       = module.lambda_function.lambda_function_arn
+}
+
+resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
+  statement_id  = "AllowExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = var.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.every_day.arn
 }

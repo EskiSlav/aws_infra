@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 data "terraform_remote_state" "lambda_layers" {
   backend = "s3"
 
@@ -7,9 +9,6 @@ data "terraform_remote_state" "lambda_layers" {
     region = "eu-west-2"
   }
 }
-
-data "aws_caller_identity" "current" {}
-
 
 data "terraform_remote_state" "compliments_dynamodb" {
   backend = "s3"
