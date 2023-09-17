@@ -1,5 +1,15 @@
 data "aws_caller_identity" "current" {}
 
+data "terraform_remote_state" "lambda_layers" {
+  backend = "s3"
+
+  config = {
+    bucket = "compliment-bot-terraform-state"
+    key    = "lambda_layers/bot/terraform.tfstate"
+    region = "eu-west-2"
+  }
+}
+
 data "terraform_remote_state" "ssm" {
   backend = "s3"
 

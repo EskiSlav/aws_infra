@@ -1,4 +1,4 @@
-# bot
+# bot_alert
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -15,7 +15,6 @@
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.56.0 |
 | <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
-| <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
 
@@ -47,17 +46,13 @@
 | [aws_iam_policy.push_to_cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy) | data source |
 | [template_file.lambda_bot_assume_role](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.lambda_bot_policy](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
-| [terraform_remote_state.compliments_dynamodb](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
-| [terraform_remote_state.lambda_layers](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
-| [terraform_remote_state.ssm](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
-| [terraform_remote_state.users_dynamodb](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_format"></a> [format](#input\_format) | Format string for cloudwatch logs | `string` | `"$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] \"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId $context.extendedRequestId"` | no |
-| <a name="input_function_name"></a> [function\_name](#input\_function\_name) | Region where resources located | `string` | `"bot"` | no |
+| <a name="input_function_name"></a> [function\_name](#input\_function\_name) | Region where resources located | `string` | `"json_refiner"` | no |
 | <a name="input_region"></a> [region](#input\_region) | Region where resources located | `string` | `"eu-west-2"` | no |
 | <a name="input_stage_name"></a> [stage\_name](#input\_stage\_name) | Stage name | `string` | `"dev"` | no |
 

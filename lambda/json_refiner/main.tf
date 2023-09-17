@@ -5,7 +5,7 @@ module "lambda_function" {
   description   = "Telegram Compliment Bot default handler of messages"
   handler       = "lambda_handler.lambda_handler"
   runtime       = "python3.9"
-  timeout       = 10
+  timeout       = 15
   # publish       = true
 
   attach_cloudwatch_logs_policy = true
@@ -15,21 +15,19 @@ module "lambda_function" {
 
   source_path = [
     {
-      path             = "../../../compliment_bot/bot",
-      pip_requirements = false,
+      path             = "../../../json_refiner/bot",
+      pip_requirements = true,
       patterns = [
         "!.mypy_cache/.*", # Skip all txt files recursively
-        "!__pycache__",
+        "!.*/__pycache__/.*",
         "!.git/.*",
         "!.pre-commit-config.yaml",
         "!.gitignore",
+        "!.DS_Store",
       ]
     }
   ]
 
-  layers = [
-    data.terraform_remote_state.lambda_layers.outputs.openai_layer_arn,
-  ]
 }
 
 resource "aws_lambda_permission" "apigw" {
@@ -46,10 +44,8 @@ resource "aws_lambda_permission" "apigw" {
 resource "aws_iam_policy" "lambda_bot_policy" {
   name        = "${var.function_name}Policy"
   path        = "/"
-  description = "Allow access to SSM"
+  description = "Allow access"
 
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
   policy = data.template_file.lambda_bot_policy.rendered
 }
 
