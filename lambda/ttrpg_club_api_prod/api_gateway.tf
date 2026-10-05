@@ -50,6 +50,7 @@ locals {
     "GET /game-log",
     "GET /game-log/{pollId}",
     "PATCH /admin/game-log/{pollId}",
+    "DELETE /admin/game-log/{pollId}",
     "GET /game-log/{pollId}/comments",
     "POST /game-log/{pollId}/comments",
     "DELETE /admin/game-log/{pollId}/comments/{commentId}",
